@@ -3,7 +3,7 @@
 docker run --privileged -p 80:80 capesh/cape:latest
 ```
 
-### Use http://machine-ip-address to access CAPE UI
+#### Use http://machine-ip-address to access CAPE UI
 
 > MAC OSX
 ```
