@@ -1,0 +1,82 @@
+version: '3'
+services:
+
+  cape:
+    image: "rancher/k3s:${K3S_VERSION:-latest}"
+    command: ["server","--https-listen-port","6441"]
+    tmpfs:
+    - /run
+    - /var/run
+    privileged: true
+    networks: 
+    - demo
+    hostname: cape
+    environment:
+    - K3S_TOKEN=148021782618917
+    - K3S_KUBECONFIG_OUTPUT=/cape/cape.yaml
+    - K3S_KUBECONFIG_MODE=666
+    - K3S_HTTPS_LISTEN_PORT=6441
+    volumes:
+    - cape:/var/lib/rancher/k3s
+    - ./kubeconfigs:/cape
+    ports:
+    - 6441:6441
+    - 80:80
+    dns_search:
+    - cape
+
+  cluster1:
+    image: "rancher/k3s:${K3S_VERSION:-latest}"
+    command: ["server","--https-listen-port","1443"]
+    tmpfs:
+    - /run
+    - /var/run
+    privileged: true
+    hostname: cluster1
+    networks: 
+    - demo
+    environment:
+    - K3S_TOKEN=148021782618917
+    - K3S_KUBECONFIG_OUTPUT=/cluster1/cluster1.yaml
+    - K3S_KUBECONFIG_MODE=666
+    - K3S_HTTPS_LISTEN_PORT=1441
+    volumes:
+    - cluster1:/var/lib/rancher/k3s
+    - ./kubeconfigs:/cluster1
+    ports:
+    - 1443:1443
+    - 180:80
+    dns_search:
+    - cluster1
+
+  cluster2:
+    image: "rancher/k3s:${K3S_VERSION:-latest}"
+    command: ["server","--https-listen-port","2443"]
+    tmpfs:
+    - /run
+    - /var/run
+    privileged: true
+    networks: 
+    - demo
+    hostname: cluster2
+    environment:
+    - K3S_TOKEN=148021782618917
+    - K3S_KUBECONFIG_OUTPUT=/cluster2/cluster2.yaml
+    - K3S_KUBECONFIG_MODE=666
+    - K3S_HTTPS_LISTEN_PORT=2443
+    volumes:
+    - cluster2:/var/lib/rancher/k3s
+    - ./kubeconfigs:/cluster2
+    ports:
+    - 2443:2443
+    - 280:80
+    dns_search:
+    - cluster2
+volumes:
+  cape: {}
+  cluster1: {}
+  cluster2: {}
+
+networks:
+  demo:
+    driver: overlay
