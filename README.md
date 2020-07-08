@@ -22,3 +22,36 @@ open http://192.168.x.x
 ```
 open http://192.168.x.x
 ```
+
+## Try CAPE on docker-compose
+> clone repo
+```
+git clone https://github.com/cape-sh/cape-docker
+cd cape-docker
+docker-compose up -d
+```
+
+> For MAC
+```
+./hacks/mac.sh
+> get the ip address of machine
+export IP=$(ipconfig getifaddr en0)
+```
+
+> Install CAPE
+replace 
+```
+export KUBECONFIG=$(pwd)/kubeconfigs/cape.yaml
+
+helm3 install cape-install cape/cape \
+--set ingress.hostname=${IP}.nip.io \
+--set scheme=http \
+--set licence="free10nodes"
+```
+
+> open CAPE UI
+```
+open http://${IP}.nip.io
+```
+
+
