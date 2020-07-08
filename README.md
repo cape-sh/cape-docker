@@ -43,7 +43,7 @@ replace
 ```
 export KUBECONFIG=$(pwd)/kubeconfigs/cape.yaml
 
-helm3 install cape-install cape/cape \
+helm install cape-install cape/cape \
 --set ingress.hostname=${IP}.nip.io \
 --set scheme=http \
 --set licence="free10nodes"
