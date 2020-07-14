@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export c1=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cape-docker_cluster1_1)
-export c2=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cape-docker_cluster2_1)
+export c1=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cluster1)
+export c2=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cluster2)
 
 sed -i.bak \
   -e 's/    certificate-authority-data.*/    insecure-skip-tls-verify: true/g' \
