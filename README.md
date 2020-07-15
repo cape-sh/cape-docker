@@ -27,6 +27,8 @@ export IP=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
 ```
 export KUBECONFIG=$(pwd)/kubeconfigs/cape.yaml
 
+helm repo add cape https://charts.cape.sh
+helm repo update
 helm install cape-install cape/cape \
 --set ingress.hostname=${IP}.nip.io \
 --set scheme=http \
