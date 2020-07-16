@@ -22,7 +22,7 @@ Deploy advanced K8s functionalities without the learning curve. This repo is for
   <img src="https://biqmind.com/wp-content/uploads/2020/07/CAPEReadmeDashboard.png" />
 </p>
 
-[![CAPE](assets/youtube-cape.png)](https://youtu.be/4KJt8NXTO8E "CAPE INTRO")
+[![CAPE](https://github.com/cape-sh/cape/blob/master/assets/youtube-cape.png)](https://youtu.be/4KJt8NXTO8E "CAPE INTRO")
 
 
 ## Features
@@ -128,9 +128,9 @@ After accessing the CAPE UI, we recommend you to go through our videos for a wal
 ## Use CAPE on Your Favorite Platforms
 CAPE is also avaliable for the following deployment platforms:
 - [Ansible](https://galaxy.ansible.com/biqmind_cloudnative/cape_ansible)
-- [Helm Charts](https://github.com/biqmind/cape-saas-operator/tree/master/helm/cape)
 - [Docker Hub](https://hub.docker.com/u/capesh)
 - [Github](https://github.com/cape-sh/cape-docker)
+- [Helm Charts](https://github.com/biqmind/cape-saas-operator/tree/master/helm/cape)
 - [OperaterHub]-> Coming soon
 
 ## Environments Supported
