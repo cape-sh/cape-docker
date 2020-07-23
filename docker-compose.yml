@@ -2,7 +2,8 @@ version: '3'
 services:
 
   cape:
-    container_name: cape
+    restart: always
+    container_name: cape 
     image: "rancher/k3s:${K3S_VERSION:-latest}"
     command: ["server","--https-listen-port","6441"]
     tmpfs:
@@ -23,6 +24,7 @@ services:
 
   cluster1:
     container_name: cluster1
+    restart: always
     image: "rancher/k3s:${K3S_VERSION:-latest}"
     command: ["server","--https-listen-port","1443"]
     tmpfs:
@@ -43,6 +45,7 @@ services:
     - 180:80
 
   cluster2:
+    restart: always
     container_name: cluster2
     image: "rancher/k3s:${K3S_VERSION:-latest}"
     command: ["server","--https-listen-port","2443"]
