@@ -1,9 +1,9 @@
 
-## Install
+## Install CAPE
 
-### Try CAPE on docker-compose
+### Try CAPE on Docker-Compose
 
-> clone repo
+> Step 1: Clone repo
 ```
 git clone https://github.com/cape-sh/cape-docker
 cd cape-docker
@@ -13,6 +13,7 @@ docker-compose up -d
 ```
 ./hacks/config.sh
 ```
+Step 2: Get ipconfig
 
 > For MAC
 ```
@@ -26,7 +27,7 @@ export IP=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
 ```
 
 
-> Install CAPE 
+> Step 3: Install CAPE 
 ```
 export KUBECONFIG=$(pwd)/kubeconfigs/cape.yaml
 
@@ -40,7 +41,7 @@ helm install cape-install cape/cape \
 kubectl -n cape wait --for=condition=available --timeout=600s deployment/web
 ```
 
-> open CAPE UI
+> Step 4: Lanuch browser
 ```
 open http://${IP}.nip.io
 ```
