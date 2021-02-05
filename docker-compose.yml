@@ -19,7 +19,7 @@ services:
     volumes:
     - ./kubeconfigs:/cape
     ports:
-    - 6441:6441
+    - 443:443
     - 80:80
 
   cluster1:
@@ -41,7 +41,7 @@ services:
     - ./kubeconfigs:/cluster1
     - ./manifests:/var/lib/rancher/k3s/server/manifests
     ports:
-    - 1443:1443
+    - 1443:443
     - 180:80
 
   cluster2:
@@ -63,7 +63,7 @@ services:
     - ./kubeconfigs:/cluster2
     - ./manifests:/var/lib/rancher/k3s/server/manifests
     ports:
-    - 2443:2443
+    - 2443:443
     - 280:80
 volumes:
   cape: {}
