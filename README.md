@@ -33,17 +33,19 @@ export KUBECONFIG=$(pwd)/kubeconfigs/cape.yaml
 
 helm repo add cape https://charts.cape.sh
 helm repo update
-helm install cape-install cape/cape \
+
+helm install cape cape/cape  \
+--set acceptTOS=true \
+--set licence="free10nodes" \
 --set ingress.hostname=${IP}.nip.io \
---set scheme=http \
---set licence="free10nodes"
+--set ingress.scheme=https
 
 kubectl -n cape wait --for=condition=available --timeout=600s deployment/web
 ```
 
-> Step 4: Lanuch browser
+> Step 4: Launch browser
 ```
-open http://${IP}.nip.io
+open https://${IP}.nip.io
 ```
 
 ## Support
