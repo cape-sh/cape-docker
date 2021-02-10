@@ -36,7 +36,6 @@ helm repo update
 
 helm install cape cape/cape  \
 --set acceptTOS=true \
---set licence="free10nodes" \
 --set ingress.hostname=${IP}.nip.io \
 --set ingress.scheme=https
 
