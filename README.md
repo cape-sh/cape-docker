@@ -10,9 +10,6 @@ cd cape-docker
 docker-compose up -d
 ```
 
-```
-./hacks/config.sh
-```
 Step 2: Get ipconfig
 
 > For MAC
@@ -27,9 +24,9 @@ export IP=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
 ```
 
 
-> Step 3: Install CAPE 
+> Step 3: Install CAPE
 ```
-export KUBECONFIG=$(pwd)/kubeconfigs/cape.yaml
+export KUBECONFIG=$(pwd)/kubeconfigs/kubeconfig.yaml
 
 helm repo add cape https://charts.cape.sh
 helm repo update
@@ -47,6 +44,16 @@ kubectl -n cape wait --for=condition=available --timeout=600s deployment/web
 open https://${IP}.nip.io
 ```
 
+to clear the cluster setup
+while in the cape-docker folder, run this:
+```
+docker-compose down
+```
+
+and then clear the generated kubeconfigs and manifests
+```
+make clean
+```
+
 ## Support
 For more information on CAPE, return to the main [Repo](https://github.com/cape-sh/cape)
-

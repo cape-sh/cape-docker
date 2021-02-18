@@ -1,71 +1,57 @@
 version: '3'
 services:
 
-  cape:
+  server:
+    container_name: server
+    image: "rancher/k3s:v1.20.2-k3s1"
     restart: always
-    container_name: cape 
-    image: "rancher/k3s:${K3S_VERSION:-latest}"
-    command: ["server","--https-listen-port","6441"]
     tmpfs:
     - /run
     - /var/run
+    command: server
     privileged: true
-    hostname: cape
+    hostname: server
     environment:
     - K3S_TOKEN=148021782618917
-    - K3S_KUBECONFIG_OUTPUT=/cape/cape.yaml
+    - K3S_KUBECONFIG_OUTPUT=/kubeconfigs/kubeconfig.yaml
     - K3S_KUBECONFIG_MODE=666
-    - K3S_HTTPS_LISTEN_PORT=6441
     volumes:
-    - ./kubeconfigs:/cape
+    - server:/var/lib/rancher/k3s
+    # This is just so that we get the kubeconfig file out
+    - ./kubeconfigs:/kubeconfigs
     ports:
     - 443:443
-    - 80:80
+    - 6443:6443
 
-  cluster1:
-    container_name: cluster1
+  agent1:
+    container_name: agent1
+    image: "rancher/k3s:v1.20.2-k3s1"
     restart: always
-    image: "rancher/k3s:${K3S_VERSION:-latest}"
-    command: ["server","--https-listen-port","1443"]
     tmpfs:
     - /run
     - /var/run
     privileged: true
-    hostname: cluster1
+    hostname: agent1
     environment:
     - K3S_TOKEN=148021782618917
-    - K3S_KUBECONFIG_OUTPUT=/cluster1/cluster1.yaml
-    - K3S_KUBECONFIG_MODE=666
-    - K3S_HTTPS_LISTEN_PORT=1441
-    volumes:
-    - ./kubeconfigs:/cluster1
-    - ./manifests:/var/lib/rancher/k3s/server/manifests
+    - K3S_URL=https://server:6443
     ports:
     - 1443:443
-    - 180:80
 
-  cluster2:
+  agent2:
+    container_name: agent2
+    image: "rancher/k3s:v1.20.2-k3s1"
     restart: always
-    container_name: cluster2
-    image: "rancher/k3s:${K3S_VERSION:-latest}"
-    command: ["server","--https-listen-port","2443"]
     tmpfs:
     - /run
     - /var/run
     privileged: true
-    hostname: cluster2
+    hostname: agent2
     environment:
     - K3S_TOKEN=148021782618917
-    - K3S_KUBECONFIG_OUTPUT=/cluster2/cluster2.yaml
-    - K3S_KUBECONFIG_MODE=666
-    - K3S_HTTPS_LISTEN_PORT=2443
-    volumes:
-    - ./kubeconfigs:/cluster2
-    - ./manifests:/var/lib/rancher/k3s/server/manifests
+    - K3S_URL=https://server:6443
     ports:
     - 2443:443
-    - 280:80
+
 volumes:
-  cape: {}
-  cluster1: {}
-  cluster2: {}
+  server: {}
